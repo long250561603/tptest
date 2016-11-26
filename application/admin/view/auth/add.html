@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>添加权限</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link href="/public/Admin/Css/mine.css" type="text/css" rel="stylesheet">
+        <style type="text/css">
+            label.error{
+                border: 2px solid red;
+                padding: 4px;
+                margin-left: 4px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="div_head">
+            <span>
+                <span style="float:left">当前位置是：权限管理-》添加权限信息</span>
+                <span style="float:right;margin-right: 8px;font-weight: bold">
+                    <a style="text-decoration: none" href="__CONTROLLER__/lst">【返回】</a>
+                </span>
+            </span>
+        </div>
+        <div></div>
+
+        <div style="font-size: 13px;margin: 10px 5px">
+        <!-- __SELF__ 一般在提交表单的时候都是提交当前的这个方法页面-->
+            <form action="{:url('Auth/add')}" method="POST" enctype="multipart/form-data" id="admin_form">
+            <table border="1" width="100%" class="table_a">
+                <tr>
+                    <td>上级权限</td>
+                    <td>
+                      <select name="parentid">
+                          <option value="0">顶级权限</option>
+                          <?php foreach ($authData as $k => $v): ?>
+                            <option value="<?php echo $v['id'];?>"><?php echo str_repeat('+', $v['level'] * 2) .$v['name'] ?></option>
+                          <?php endforeach ?>
+                      </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>权限名称</td>
+                    <td><input type="text" name="name" /></td>
+                </tr>
+                
+                 <tr>
+                    <td>权限控制器</td>
+                    <td>
+                       <input type="text" name="c"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>权限方法</td>
+                    <td>
+                       <input type="text" name="a"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="提交">
+                    </td>
+                </tr>  
+            </table>
+            </form>
+        </div>
+    </body>
+<script type="text/javascript" src="/public/admin/Js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/public/admin/Js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/public/admin/Js/validate_zh_cn.js"></script>
+<script type="text/javascript">
+    // 1. 使用 定义form表单的ID
+    // jQuery对象绑定了一个validate方法来做验证
+    $("#admin_form").validate({
+        rules:{
+            username:{
+                required:true,// 用户名必须不能为空
+                rangelength:[2,10], // 验证用户的长度必须为2-10
+            },
+            password:{
+                required:true,
+                rangelength:[2,10],
+            }, // 验证密码
+            password1:{
+                required:true,
+                rangelength:[2,10],
+                equalTo:"#psd", // 确认密码必须和第一次输入的密码一致，可以使有jQuery的选择器获取这个对象
+            },// 验证确认密码
+        }
+    });
+</script>
+</html>
