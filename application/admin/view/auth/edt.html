@@ -1,63 +1,85 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-    <head>
-        <title>修改权限</title>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="/public/Admin/Css/mine.css" type="text/css" rel="stylesheet">
-    </head>
-
-    <body>
-
-        <div class="div_head">
-            <span>
-                <span style="float:left">当前位置是：权限管理-》修改权限信息</span>
-                <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="__CONTROLLER__/lst">【返回】</a>
-                </span>
-            </span>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+<link rel="stylesheet" href="/public/admin/css/admin.css">
+<script src="/public/admin/js/jquery.js"></script>
+<script src="/public/admin/js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加管理员</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="{:url("edt","id=$authInfo[id]")}">
+    <if condition="$iscid eq 1">
+      <div class="form-group">
+        <div class="label">
+          <label>上级权限：</label>
         </div>
-        <div></div>
-
-        <div style="font-size: 13px;margin: 10px 5px">
-        <!-- __SELF__ 一般在提交表单的时候都是提交当前的这个方法页面-->
-            <form action="{:url("edt","id=$authInfo[id]")}" method="POST" enctype="multipart/form-data">
-            <table border="1" width="100%" class="table_a">
-            <!-- 告知TP修改那条主键ID的记录 -->
-                <input type="hidden" name="auth_id" value="<?php echo $authInfo['id'];?>">
-                 <tr>
-                    <td>上级权限</td>
-                    <td>
-                      <select name="parentid">
-                          <option value="0">顶级权限</option>
-                          <?php foreach ($authData as $k => $v): ?>
-                            <option value="<?php echo $v['id'];?>"><?php echo str_repeat('+', $v['level'] * 2) . $v['name'];?></option>
-                          <?php endforeach ?>
-                      </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>权限名称</td>
-                    <td><input type="text" name="name" value="<?php echo $authInfo['name'];?>" /></td>
-                </tr>
-                <tr>
-                    <td>权限的控制器</td>
-                    <td>
-                       <input type="text" name="c" value="<?php echo $authInfo['c'];?>" />
-                    </td>
-                </tr>
-                 <tr>
-                    <td>权限的方法</td>
-                    <td>
-                       <input type="text" name="a" value="<?php echo $authInfo['a'];?>" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" value="修改">
-                    </td>
-                </tr>  
-            </table>
-            </form>
+        <div class="field">
+          <select name="pid" class="input w50">
+            <option value="0">顶级菜单</option>
+            <?php foreach ($authData as $k => $v): ?>
+            <option value="<?php echo $v['id'];?>"><?php echo str_repeat('+', $v['level'] * 2) .$v['title'] ?></option>
+            <?php endforeach ?>
+          </select>
+          </select>
+          <div class="tips"></div>
         </div>
-    </body>
-</html>
+      </div>
+    </if>
+    <div class="form-group">
+        <div class="label">
+          <label>权限名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="<?php echo $authInfo['title'];?>" name="title" data-validate="required:请输入用户名" />
+          <div class="tips"></div>
+        </div>
+      </div>
+    <div class="form-group">
+        <div class="label">
+          <label>控制器方法：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="<?php echo $authInfo['name'];?>" name="name"  />
+          <div class="tips"></div>
+        </div>
+      </div>
+    <div class="form-group">
+      <div class="label">
+        <label>状态：</label>
+      </div>
+      <div class="field">
+        <input type="radio" name="status" value="1" title="启用" checked="checked">启用
+        <input type="radio" name="status" value="0" title="禁用">禁用
+        <div class="tips"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="label">
+        <label>排序：</label>
+      </div>
+      <div class="field">
+        <td><input type="text" name="sort[1]" value="<?php echo $authInfo['sort'];?>" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
+        <div class="tips"></div>
+      </div>
+    </div>
+
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body></html>

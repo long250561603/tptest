@@ -236,4 +236,40 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    // 验证码配置
+    'captcha'  => [
+        // 验证码字符集合
+        'codeSet'  => '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY',
+        // 验证码字体大小(px)
+        'fontSize' => 22,
+        // 是否画混淆曲线
+        'useCurve' => true,
+        // 验证码位数
+        'length'   => 4,
+        // 验证成功后是否重置
+        'reset'    => true
+    ],
+
+    // +----------------------------------------------------------------------
+    // | auth配置
+    // +----------------------------------------------------------------------
+
+    'auth'        => [
+        // 权限开关
+        'auth_on'           => 1,
+        // 认证方式，1为实时认证；2为登录认证。
+        'auth_type'         => 1,
+        // 用户组数据不带前缀表名
+        'auth_group'        => 'role',
+        // 用户-用户组关系不带前缀表
+        'auth_group_access' => 'auth_role',
+        // 权限规则不带前缀表
+        'auth_rule'         => 'auth',
+        // 用户信息不带前缀表
+        'auth_user'         => 'admin',
+    ],
+
+    // 全站加密密钥（开发新站点前请修改此项）
+    'salt'        => '1dFlxLhiuLpnUZ79kA',
+
 ];

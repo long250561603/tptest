@@ -1,20 +1,59 @@
-<!doctype html public "-//w3c//dtd xhtml 1.0 frameset//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-frameset.dtd">
-<html>
-    <head>
-        <meta http-equiv=content-type content="text/html; charset=utf-8" />
-        <meta http-equiv=pragma content=no-cache />
-        <meta http-equiv=cache-control content=no-cache />
-        <meta http-equiv=expires content=-1000 />
-        
-        <title>管理中心</title>
-    </head>
-    <frameset border=0 framespacing=0 rows="60, *" frameborder=0>
-        <frame name=head src="{:url('head')}" frameborder=0 noresize scrolling=no>
-            <frameset cols="170, *">
-                <frame name=left src="{:url('left')}" frameborder=0 noresize />
-                <frame name=right src="{:url('right')}" frameborder=0 noresize scrolling=yes />
-            </frameset>
-    </frameset>
-    <noframes>
-    </noframes>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>后台管理中心</title>
+    <link rel="stylesheet" href="/public/admin/css/pintuer.css">
+    <link rel="stylesheet" href="/public/admin/css/admin.css">
+    <script src="/public/admin/js/jquery.js"></script>
+</head>
+<body style="background-color:#f2f9fd;">
+<div class="header bg-main">
+    <div class="logo margin-big-left fadein-top">
+        <h1><img src="/public/admin/images/y.jpg" class="radius-circle rotate-hover" height="50" alt=""/>后台管理中心</h1>
+    </div>
+    <div class="head-l"><a class="button button-little bg-green" href="" target="_blank"><span class="icon-home"></span>
+        前台首页</a> &nbsp;&nbsp;<a href="##" class="button button-little bg-blue"><span class="icon-wrench"></span>
+        清除缓存</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="{:url('login/logout')}"><span
+            class="icon-power-off"></span> 退出登录</a></div>
+</div>
+<div class="leftnav">
+    <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
+    <?php $menu = session('menu'); foreach ($menu as $k => $v): ?>
+    <h2><span class="icon-pencil-square-o" onclick=expand(<?php echo
+              $k;?>)href="javascript:void(0);"></span><?php echo $v['title'];?></h2>
+    <ul>
+        <?php foreach ($v['sub'] as $k1 => $v1): ?>
+        <li><a href="/admin/<?php echo $v1['name'];?>" target="right" id=child<?php echo $k;?><span
+                class="icon-caret-right"></span><?php echo $v1['title'];?></a></li>
+        <?php endforeach ?>
+    </ul>
+    <?php endforeach ?>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".leftnav h2").click(function () {
+            $(this).next().slideToggle(200);
+            $(this).toggleClass("on");
+        })
+        $(".leftnav ul li a").click(function () {
+            $("#a_leader_txt").text($(this).text());
+            $(".leftnav ul li a").removeClass("on");
+            $(this).addClass("on");
+        })
+    });
+</script>
+<ul class="bread">
+    <li><a href="" target="right" class="icon-home"> 首页</a></li>
+    <li><a href="##" id="a_leader_txt">网站信息</a></li>
+    <li><b>当前语言：</b><span style="color:red;">中文</php></span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;切换语言：<a href="##">中文</a> &nbsp;&nbsp;<a href="##">英文</a></li>
+</ul>
+<div class="admin">
+    <iframe scrolling="auto" rameborder="0" src="{:url('index/info')}" name="right" width="100%" height="100%"></iframe>
+</div>
+</body>
 </html>

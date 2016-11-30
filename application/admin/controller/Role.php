@@ -20,29 +20,28 @@ class Role extends Base
      * 角色列表
      */
     public function lst(){
+
+        /*$roleLst = Db::table('it_role')->field('a.*, group_concat(b.tetle) tetle')->alias('a')->join('left join it_auth b on find_in_set(b.id,a.rules)')->group('a.id')->select();
+        echo "<pre>";
+        print_r($roleLst);die;*/
         $roleLst=db('role')->select();
         $this->assign('roleLst',$roleLst);
         return $this->fetch();
     }
     public function add(){
         //判读是否提交过来
-        if(request()->isPost()) {
+        if ($this->request->isPost()) {
             $data = input();
-            $count = db('role')->where('name', $data['name'])->count();
+            $count = db('role')->where('title', $data['title'])->count();
             if ($count) {
-                $this->error('用户名已存在');
+                $this->error('角色名已存在');
             }
-            $data = ['name'=>$data['name'],'updatetime'=>time(),'rules'=>$data['rules']];
-            $res = db('role')->insert($data);
-            if ($res){
-                $this->success('操作成功', url('lst'));
-            }else{
-                $this->error('操作失败');
+            if (db('role')->insert($data) !== false) {
+                $this->success('保存成功',url('lst'));
+            } else {
+                $this->error('保存失败');
             }
         }
-        $authData = Loader::model('auth')->getTree();
-        $this->assign('authData',$authData);
-
         return $this->fetch();
     }
 
@@ -61,8 +60,7 @@ class Role extends Base
     public function edt($id){
         if (request()->isPost()){
             $data = input();
-            $data = ['name'=>$data['name'],'updatetime'=>time(),'rules'=>$data['rules']];
-            $res=db('role')->where('id',1)->update($data);
+            $res=db('role')->where('id',$id)->update($data);
             if ($res){
                 $this->success('操作成功', url('lst'));
             }else{
@@ -71,10 +69,35 @@ class Role extends Base
         }else{
             $roleLst=db('role')->where('id',$id)->find();
             $this->assign('roleLst',$roleLst);
-            $authData = Loader::model('auth')->getTree();
-            $this->assign('authData',$authData);
             return $this->fetch();
+        }
+    }
+    /**
+     * 授权
+     * @param $id
+     * @return mixed
+     */
+    public function auth($id) {
+        $this->assign('id',$id);
+        $rules= Loader::model("role")->where('id',$id)->value('rules');;
+        $this->assign('rules',$rules);
+
+        $authModel =Loader::model("auth");
+        $authData = $authModel->getTree();
+        $this->assign('authData', $authData);
+        return $this->fetch();
+
+    }
+    public function authAdd($id){
+        $data = input();
+        $res=Loader::model("role")->where('id',$id)->setField('rules',implode(',', $data['rules']));
+        if ($res){
+            $this->success('操作成功', url('lst'));
+        }else{
+            $this->error('操作失败');
         }
 
     }
+
+
 }

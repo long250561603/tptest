@@ -7,8 +7,10 @@
  */
 
 namespace app\admin\controller;
-use think\Loader;
 use think\Db;
+use think\Input;
+use think\Loader;
+use think\Request;
 class Auth extends Base
 {
     /**
@@ -18,18 +20,18 @@ class Auth extends Base
     {
         if (request()->isPost()) {
             $data = input();
-            $res = model('auth')->allowField(true)->save($data);
-            if ($res) {
-                $this->success('操作成功', url('lst'));
-            } else {
-                $this->error('操作失败');
-            }
+            $res=db('auth')->insert($data);
+           if ($res){
+               return $this->success('添加成功', url('lst'));
+           }else{
+               return $this->error('删除失败');
+           }
+        }else{
+            //下拉菜单
+            $authData = Loader::model('auth')->getTree();
+            $this->assign('authData',$authData);
+            return $this->fetch();
         }
-
-        //下拉菜单
-        $authData = Loader::model('auth')->getTree();
-        $this->assign('authData',$authData);
-        return $this->fetch();
     }
     public function lst(){
         $authData = Loader::model('auth')->getTree();
@@ -48,11 +50,9 @@ class Auth extends Base
     public function edt($id){
         if (request()->isPost()) {
             $data = input();
-            $data['updatetime'] = time();
-            if ($data['parentid'] == null) {
-                $data['parentid'] = 0;
+            if ($data['pid'] == null) {
+                $data['pid'] = 0;
             }
-
             $res = model('auth')->allowField(true)->save($data, ['id' => $data['id']]);
             if ($res) {
                 $this->success('操作成功', url('lst'));
