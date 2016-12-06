@@ -12,7 +12,7 @@ use think\Controller;
 use think\Db;
 use think\Session;
 
-class Login extends Base
+class Login extends Controller
 {
     public function index(){
         return $this->fetch();
@@ -41,6 +41,7 @@ class Login extends Base
                         ]
                     );
                     // 登入成功，需要将用户的角色权限保存到session中
+                    $this->_putAuthToSession($admin_user['role_id']);
                     $this->_putAuthToSession($admin_user['role_id']);
                     $this->success('登录成功', 'admin/index/index');
                 }

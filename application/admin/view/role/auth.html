@@ -17,8 +17,7 @@
 <div class="panel admin-panel">
     <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加权限组</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="{:url(" authAdd
-        ","id=$id")}">
+        <form method="post" class="form-x" action="{:url("authAdd","id=$id")}">
         <div class="form-group">
             <div class="label">
                 <label>选择权限：</label>
@@ -27,11 +26,10 @@
                 <?php foreach($authData as $k=>$v): ?>
                 <li>
                     <?php echo str_repeat('&nbsp;',$v['level']*2);?>
-                    <?php if($rules==$v['id']){ ?>
-                    <input type="checkbox" name="rules[]" checked="checked" value="<?php echo $v['id']; ?>">
-                    <?php }else{ ?>
+
+
                     <input type="checkbox" name="rules[]" value="<?php echo $v['id']; ?>">
-                    <?php }?>
+
                     <?php echo $v['title']; ?>
                 </li>
 

@@ -16,7 +16,7 @@
         <h1><img src="/public/admin/images/y.jpg" class="radius-circle rotate-hover" height="50" alt=""/>后台管理中心</h1>
     </div>
     <div class="head-l"><a class="button button-little bg-green" href="" target="_blank"><span class="icon-home"></span>
-        前台首页</a> &nbsp;&nbsp;<a href="##" class="button button-little bg-blue"><span class="icon-wrench"></span>
+        前台首页</a> &nbsp;&nbsp;<a href="{:url('System/clear')}" class="button button-little bg-blue"><span class="icon-wrench"></span>
         清除缓存</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="{:url('login/logout')}"><span
             class="icon-power-off"></span> 退出登录</a></div>
 </div>
@@ -27,7 +27,7 @@
               $k;?>)href="javascript:void(0);"></span><?php echo $v['title'];?></h2>
     <ul>
         <?php foreach ($v['sub'] as $k1 => $v1): ?>
-        <li><a href="/admin/<?php echo $v1['name'];?>" target="right" id=child<?php echo $k;?><span
+        <li><a href="/index.php/admin/<?php echo $v1['name'];?>" target="right" id=child<?php echo $k;?><span
                 class="icon-caret-right"></span><?php echo $v1['title'];?></a></li>
         <?php endforeach ?>
     </ul>
@@ -47,7 +47,7 @@
     });
 </script>
 <ul class="bread">
-    <li><a href="" target="right" class="icon-home"> 首页</a></li>
+    <li><a href="{:url('index/info')}" target="right" class="icon-home"> 首页</a></li>
     <li><a href="##" id="a_leader_txt">网站信息</a></li>
     <li><b>当前语言：</b><span style="color:red;">中文</php></span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;切换语言：<a href="##">中文</a> &nbsp;&nbsp;<a href="##">英文</a></li>

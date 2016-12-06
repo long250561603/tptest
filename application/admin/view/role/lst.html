@@ -40,6 +40,7 @@
         <th width="100" style="text-align:left; padding-left:20px;">ID</th>
         <th width="10%">排序</th>
         <th>角色名称</th>
+        <th>权限</th>
         <th>是否启用</th>
         <th width="310">操作</th>
       </tr>
@@ -50,6 +51,11 @@
               <?php echo $v['id'];?></td>
           <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
           <td><?php echo $v['title'];?></td>
+          <?php if($v['rules'] =='*'){;?>
+          <td>全部权限</td>
+          <?php }else{;?>
+          <td><?php echo $v['rules'];?></td>
+          <?php };?>
           <td><font color="#00CC99"><?php echo $v['status']==1 ? '启用':'禁用'  ;?></font></td>
           <td><div class="button-group">
               <a class="button border-main" href="{:url("auth","id=$v[id]")}"><span class="icon-edit"></span> 授权</a>

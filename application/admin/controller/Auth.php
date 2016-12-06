@@ -35,7 +35,10 @@ class Auth extends Base
     }
     public function lst(){
         $authData = Loader::model('auth')->getTree();
+       
+    // 把分页数据赋值给模板变量list
         $this->assign('authData',$authData);
+        // 渲染模板输出
         return $this->fetch();
     }
     public function del(){

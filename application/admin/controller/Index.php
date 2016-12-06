@@ -15,6 +15,9 @@ class Index extends Base
         if (!Session::has('admin_id')) {
             $this->redirect('admin/login/index');
         }
+        return $this->fetch();
+    }
+    public function info(){
         $version = Db::query('SELECT VERSION() AS ver');
         $config  = [
             'url'             => $_SERVER['HTTP_HOST'],////当前请求的 Host: 头部的内容。
@@ -27,10 +30,7 @@ class Index extends Base
             'mysql_version'   => $version[0]['ver'],
             'max_upload_size' => ini_get('upload_max_filesize')
         ];
-
-        return $this->fetch('index', ['config' => $config]);
-    }
-    public function info(){
+            $this->assign('config',$config);
         return $this->fetch();
     }
 }
