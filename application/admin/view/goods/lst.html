@@ -58,82 +58,46 @@
     </div>
     <table class="table table-hover text-center">
       <tr>
-        <th width="100" style="text-align:left; padding-left:20px;">ID</th>
-        <th width="10%">排序</th>
-        <th>图片</th>
-        <th>名称</th>
-        <th>属性</th>
-        <th>分类名称</th>
-        <th width="10%">更新时间</th>
+        <th width="100" style="text-align:left; padding-left:20px;">序号</th>
+        <th>商品名称</th>
+        <th>商品价格</th>
+        <th>商品库存</th>
+        <th>是否上架</th>
+        <th>是否新品</th>
+        <th>是否精品</th>
+        <th>是否热销</th>
+        <th>添加时间</th>
+        <th>商品图片</th>
         <th width="310">操作</th>
       </tr>
+        <?php foreach ($goodsData as $k => $v): ?>
       <volist name="list" id="vo">
         <tr>
           <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="/public/admin/images/11.jpg" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+              <?php echo $k+1;?></td>
+          <td><?php echo $v['goods_name'];?></td>
+          <td><?php echo $v['goods_price'];?></td>
+          <td><?php echo $v['goods_number'];?></td>
+            <td><?php echo $v['is_sale'] == 1 ? '上架' : '下架';?></td>
+            <td><?php echo $v['is_new'] == 1 ? '新品' : '非新品';?></td>
+            <td><?php echo $v['is_best'] == 1 ? '精品' : '非精品';?></td>
+            <td><?php echo $v['is_hot'] == 1 ? '热销' : '非热销';?></td>
+            <td><?php echo date("Y-m-d H:i:s", $v['created']);?></td>
+            <td>
+                <?php if( $v['goods_thumb'] && file_exists($rootPath . $v['goods_thumb'])){
+                                        echo "<a href='".$viewPath.$v['goods_img']."' data-lightbox='light-test' > <img src='".$viewPath.$v['goods_thumb']."' width='50px;' /> </a>";
+                }else{
+                echo "暂无图片";
+                }
+
+                ?>
+
+            </td>
+          <td><div class="button-group"> <a class="button border-main" href="{:url('Goods/edt');}"><span class="icon-edit"></span> 修改</a>
+              <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
         </tr>
-   		 <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="/public/admin/images/11.jpg" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="/public/admin/images/11.jpg" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="/public/admin/images/11.jpg" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="/public/admin/images/11.jpg" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="/public/admin/images/11.jpg" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
+      </volist>
+        <?php endforeach ?>
       <tr>
         <td style="text-align:left; padding:19px 0;padding-left:20px;"><input type="checkbox" id="checkall"/>
           全选 </td>
@@ -174,6 +138,7 @@
       <tr>
         <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
       </tr>
+
     </table>
   </div>
 </form>
