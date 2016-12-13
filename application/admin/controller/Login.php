@@ -12,11 +12,24 @@ use think\Controller;
 use think\Db;
 use think\Session;
 
+/***
+ * Class Login
+ * @package app\admin\controller
+ * 登陆类
+ */
 class Login extends Controller
 {
+    /***
+     * @return mixed
+     * 登录主页面
+     */
     public function index(){
         return $this->fetch();
     }
+
+    /**
+     * 登录方法
+     */
     public function login(){
         $data            = $this->request->only(['username', 'password', 'verify']);
         $validate_result = $this->validate($data, 'Login');

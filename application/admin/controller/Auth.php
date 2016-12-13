@@ -11,6 +11,12 @@ use think\Db;
 use think\Input;
 use think\Loader;
 use think\Request;
+
+/***
+ * Class Auth
+ * @package app\admin\controller
+ * 权限类
+ */
 class Auth extends Base
 {
     /**
@@ -33,6 +39,9 @@ class Auth extends Base
             return $this->fetch();
         }
     }
+    /*
+     * 权限列表
+     */
     public function lst(){
         $authData = Loader::model('auth')->getTree();
        
@@ -41,6 +50,10 @@ class Auth extends Base
         // 渲染模板输出
         return $this->fetch();
     }
+
+    /**
+     * 删除权限
+     */
     public function del(){
         $id =input('id');
         $rs = Db::name('auth')->where('id','=',$id)->delete();
@@ -50,6 +63,12 @@ class Auth extends Base
             return $this->error('删除失败');
         }
     }
+
+    /***
+     * @param $id
+     * @return mixed
+     * 编辑权限
+     */
     public function edt($id){
         if (request()->isPost()) {
             $data = input();

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+<link rel="stylesheet" href="/public/admin/css/admin.css">
+<script src="/public/admin/js/jquery.js"></script>
+<script src="/public/admin/js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加管理员</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="{:url("edt","id=$authInfo[id]")}">
+    <if condition="$iscid eq 1">
+      <div class="form-group">
+        <div class="label">
+          <label>上级权限：</label>
+        </div>
+        <div class="field">
+          <select name="pid" class="input w50">
+            <option value="0">顶级菜单</option>
+            <?php foreach ($authData as $k => $v): ?>
+            <option value="<?php echo $v['id'];?>"><?php echo str_repeat('+', $v['level'] * 2) .$v['title'] ?></option>
+            <?php endforeach ?>
+          </select>
+          </select>
+          <div class="tips"></div>
+        </div>
+      </div>
+    </if>
+    <div class="form-group">
+        <div class="label">
+          <label>权限名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="<?php echo $authInfo['title'];?>" name="title" data-validate="required:请输入用户名" />
+          <div class="tips"></div>
+        </div>
+      </div>
+    <div class="form-group">
+        <div class="label">
+          <label>控制器方法：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="<?php echo $authInfo['name'];?>" name="name"  />
+          <div class="tips"></div>
+        </div>
+      </div>
+    <div class="form-group">
+      <div class="label">
+        <label>状态：</label>
+      </div>
+      <div class="field">
+        <input type="radio" name="status" value="1" title="启用" checked="checked">启用
+        <input type="radio" name="status" value="0" title="禁用">禁用
+        <div class="tips"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="label">
+        <label>排序：</label>
+      </div>
+      <div class="field">
+        <td><input type="text" name="sort[1]" value="<?php echo $authInfo['sort'];?>" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
+        <div class="tips"></div>
+      </div>
+    </div>
+
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body></html>

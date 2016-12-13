@@ -11,9 +11,12 @@ use think\Db;
 use think\Input;
 use think\Loader;
 use think\Request;
-/*
+
+/**
+ * Class Role
+ * @package app\admin\controller
  * 角色类
- * */
+ */
 class Role extends Base
 {
     /**
@@ -28,6 +31,11 @@ class Role extends Base
         $this->assign('roleLst',$roleLst);
         return $this->fetch();
     }
+
+    /**
+     * @return mixed
+     * 添加角色
+     */
     public function add(){
         //判读是否提交过来
         if ($this->request->isPost()) {
@@ -57,6 +65,12 @@ class Role extends Base
             $this->error('操作失败');
         }
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     * 编辑角色
+     */
     public function edt($id){
         if (request()->isPost()){
             $data = input();
@@ -88,6 +102,11 @@ class Role extends Base
         return $this->fetch();
 
     }
+
+    /**
+     * @param $id
+     * 添加权限
+     */
     public function authAdd($id){
         $data = input();
         $res=Loader::model("role")->where('id',$id)->setField('rules',implode(',', $data['rules']));

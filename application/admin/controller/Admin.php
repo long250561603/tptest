@@ -17,9 +17,18 @@ use think\Request;
  */
 class Admin extends Base
 {
+    /**
+     * @return mixed
+     *
+     */
     public function index(){
         return $this->fetch();
     }
+
+    /**
+     * @return mixed
+     * 管理有列表
+     */
     public function lst(){
         $adminLst=Db::table('it_admin')
             ->alias('a')
@@ -28,6 +37,12 @@ class Admin extends Base
         $this->assign('adminLst', $adminLst);
         return $this->fetch();
     }
+
+    /**
+     * @param $id
+     * @return mixed|void
+     * 编辑管理员
+     */
     public function edt($id){
         if (request()->isPost()) {
             $data            = $this->request->post();
@@ -62,6 +77,11 @@ class Admin extends Base
                 return $this->fetch('edt');
             }
     }
+
+    /**
+     * @return mixed
+     * 添加管理员
+     */
     public function add(){
         //判读是否提交过来
         if(request()->isPost()) {

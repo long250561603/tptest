@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+<link rel="stylesheet" href="/public/admin/css/admin.css">
+<script src="/public/admin/js/jquery.js"></script>
+<script src="/public/admin/js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加属性</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="{:url('add')}">
+      <if condition="$iscid eq 1">
+        <div class="form-group">
+          <div class="label">
+            <label>商品类型：</label>
+
+          </div>
+          <div class="field">
+            <select name="type_id" class="input w50">
+              <option value="0">选择类型</option>
+              <?php foreach ($type as $k => $v):
+              if($type_id == $v['id']){
+              $selected = 'selected="selected"';
+              }else{
+              $selected = '';
+              }
+              ?>
+              <option value="<?php echo $v['id'];?>" <?php echo $selected; ?>><?php echo $v['type_name']; ?></option>
+              <?php endforeach ?>
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>
+      </if>
+      <div class="form-group">
+        <div class="label">
+          <label>属性名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="attr_name" data-validate="required:属性名称" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>属性类型：</label>
+        </div>
+        <div class="field">
+          <input type="radio" checked="checked" name="attr_type" value="0" />唯一
+          <input type="radio"  name="attr_type" value="1" />单选
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>属性录入方式：</label>
+        </div>
+        <div class="field">
+          <input type="radio" checked="checked" name="attr_input_type" value="0" />手工
+          <input type="radio" name="attr_input_type" value="1" />列表(<font color="red">可选值使用','分隔</font>)
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>属性可选值：</label>
+        </div>
+        <div class="field">
+          <textarea id="content" rows="10" cols="40" name="attr_values" disabled="disabled"></textarea>
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  $("input[name=attr_input_type]").click(function(event) {
+
+    var _status = $(this).val();
+    if(_status == 0){
+      // 手工
+      $("#content").attr('disabled',true);
+    }else{
+      // 列表
+      $("#content").attr('disabled', false);
+    }
+
+  });
+</script>
+</body>
+</html>

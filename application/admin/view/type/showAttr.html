@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/public/admin/css/pintuer.css">
+<link rel="stylesheet" href="/public/admin/css/admin.css">
+<script src="/public/admin/js/jquery.js"></script>
+<script src="/public/admin/js/pintuer.js"></script>
+</head>
+<body>
+<form method="post" action="" id="listform">
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder"> 属性列表</strong>
+      <a href="{:url("Attribute/add","type_id=$type_id");}" style="float:right;">添加属性</a>
+    </div>
+    <table class="table table-hover text-center">
+      <tr>
+        <th width="100" style="text-align:left; padding-left:20px;">ID</th>
+        <th>属性名称</th>
+        <th>属性类型</th>
+        <th>属性录入方式</th>
+        <th>属性可选值</th>
+        <th width="310">操作</th>
+      </tr>
+      <volist name="list" id="vo">
+        <?php foreach ($attributeData as $k => $v): ?>
+        <tr>
+          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
+              <?php echo $v['attr_id'];?></td>
+          <td><?php echo $v['attr_name'];?></td>
+          <td><?php echo $v['attr_type'] == 0 ? '唯一' : '单选';?></td>
+          <td><?php echo $v['attr_input_type'] == 0 ? '手工' : '列表';?></td>
+          <td><?php echo $v['attr_values'];?></td>
+          <td><div class="button-group">
+              <a class="button border-main" href="{:url("Attribute/edt","id=1")}"><span class="icon-edit"></span> 修改</a>
+            <a class="button border-red" href="{:url("Attribute/del","id=2")}"><span class="icon-trash-o"></span> 删除</a>
+          </div></td>
+        </tr>
+        <?php endforeach ?>
+      </volist>
+      <tr>
+        <td colspan="8"><div class="pagelist"></div></td>
+      </tr>
+    </table>
+  </div>
+</form>
+<script type="text/javascript">
+</script>
+</body>
+</html>

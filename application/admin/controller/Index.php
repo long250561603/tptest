@@ -2,6 +2,12 @@
 namespace app\admin\controller;
 use think\Db;
 use think\Session;
+
+/**
+ * Class Index
+ * @package app\admin\controller
+ * 后台主页类
+ */
 class Index extends Base
 {
     protected function _initialize() {
@@ -17,6 +23,11 @@ class Index extends Base
         }
         return $this->fetch();
     }
+
+    /**
+     * @return mixed
+     * 网站信息
+     */
     public function info(){
         $version = Db::query('SELECT VERSION() AS ver');
         $config  = [

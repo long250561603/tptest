@@ -18,7 +18,7 @@ use think\Session;
 /***
  * Class Base
  * @package app\index\controller
- * 基础类
+ * 父类
  */
 class Base extends Controller
 {
@@ -60,5 +60,5 @@ class Base extends Controller
         }
 
     }
-    
+
 }

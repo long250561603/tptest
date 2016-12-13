@@ -1,218 +1,280 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="renderer" content="webkit">
-<title></title>
-<link rel="stylesheet" href="/public/admin/css/pintuer.css">
-<link rel="stylesheet" href="/public/admin/css/admin.css">
-<script src="/public/admin/js/jquery.js"></script>
-<script src="/public/admin/js/pintuer.js"></script>
-  <!-- laydate插件引入 -->
-  <script type="text/javascript" src="/public/admin/js/laydate.js"></script>
-  <!-- 引入百度在线编辑器，需要注意的是，顺序不能变 -->
-  <script type="text/javascript" src="/public/ueditor/ueditor.config.js"></script>
-  <script type="text/javascript" src="/public/ueditor/ueditor.all.min.js"></script>
-  <script type="text/javascript" src="/public/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="/public/admin/css/pintuer.css">
+    <link rel="stylesheet" href="/public/admin/css/admin.css">
+    <script src="/public/admin/js/jquery.js"></script>
+    <script src="/public/admin/js/pintuer.js"></script>
+    <!-- laydate插件引入 -->
+    <script type="text/javascript" src="/public/admin/js/laydate.js"></script>
+    <!-- 引入百度在线编辑器，需要注意的是，顺序不能变 -->
+    <script type="text/javascript" src="/public/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="/public/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="/public/ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
 <div class="panel admin-panel">
-  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
-  <div class="body-content">
-    <form method="post" class="form-x" action="{:url('Goods/add')}">
-      <div class="form-group">
-        <div class="label">
-          <label>商品名称：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" value="" name="goods_name" data-validate="required:请输入商品名称" />
-          <div class="tips"></div>
-        </div>
-      </div><div class="form-group">
-        <div class="label">
-          <label>商品价格：</label>
-        </div>
-        <div class="field">
-          <input type="text" name="goods_price" />
-          <div class="tips"></div>
-        </div>
-      </div><div class="form-group">
-        <div class="label">
-          <label>商品库存：</label>
-        </div>
-        <div class="field">
-          <input type="text" name="goods_number" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>是否上架：</label>
-        </div>
-        <div class="field">
-          <input type="radio" name="is_sale" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_sale" value= '0' /> 否
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>是否新品：</label>
-        </div>
-        <div class="field">
-          <input type="radio" name="is_new" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_new" value= '0' /> 否
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>是否热销：</label>
-        </div>
-        <div class="field">
-          <input type="radio" name="is_hot" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_hot" value= '0' /> 否
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>是否精品：</label>
-        </div>
-        <div class="field">
-          <input type="radio" name="is_best" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_best" value= '0' /> 否
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>是否显示二维码：</label>
-        </div>
-        <div class="field">
-          <input type="radio" name="is_code_show" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_code_show" value= '0' /> 否
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>是否生成二维码：</label>
-        </div>
-        <div class="field">
-          <input type="radio" name="is_code" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_code" value= '0' /> 否
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>二维码地址：</label>
-        </div>
-        <div class="field">
-          <input type="text" name="code_url" class="input w50"/>
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>商品图片：</label>
-        </div>
-        <div class="field">
-          <input type="text" id="url1" name="goods_img" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
-          <div class="tipss">图片尺寸：500*500</div>
-        </div>
-      </div>
-      
-      <if condition="$iscid eq 1">
-        <div class="form-group">
-          <div class="label">
-            <label>商品类型：</label>
-          </div>
-          <div class="field">
-            <select name="cid" class="input w50">
-              <option value="">请选择分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-            </select>
-            <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            <label>商品分类：</label>
-          </div>
-          <div class="field">
-            <select name="cid" class="input w50">
-              <option value="">请选择分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-            </select>
-            <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            <label>其他属性：</label>
-          </div>
-          <div class="field" style="padding-top:8px;"> 
-            首页 <input id="ishome"  type="checkbox" />
-            推荐 <input id="isvouch"  type="checkbox" />
-            置顶 <input id="istop"  type="checkbox" /> 
-         
-          </div>
-        </div>
-      </if>
-      <div class="form-group">
-        <div class="label">
-          <label>商品描述：</label>
-        </div>
-        <div class="field">
-          <textarea id="content" rows="10" cols="40" name="goods_descp"></textarea>
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>发布时间：</label>
-        </div>
-        <div class="field">
-          <input type="text" name="created" id="created" value="" class="laydate-icon" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="clear"></div>
-      <div class="form-group">
-        <div class="label">
-          <label></label>
-        </div>
-        <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
-        </div>
-      </div>
-    </form>
-  </div>
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="">
+            <div class="form-group">
+                <div class="label">
+                    <label>商品名称：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="" name="goods_name" data-validate="required:请输入商品名称"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>商品价格：</label>
+                </div>
+                <div class="field">
+                    <input type="text" name="goods_price" data-validate="number:输入数字"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>商品库存：</label>
+                </div>
+                <div class="field">
+                    <input type="text" name="goods_number" data-validate="number:输入数字"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>是否上架：</label>
+                </div>
+                <div class="field">
+                    <input type="radio" name="is_sale" checked="checked" value='1'/> 是
+                    <input type="radio" name="is_sale" value='0'/> 否
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>是否新品：</label>
+                </div>
+                <div class="field">
+                    <input type="radio" name="is_new" checked="checked" value='1'/> 是
+                    <input type="radio" name="is_new" value='0'/> 否
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>是否热销：</label>
+                </div>
+                <div class="field">
+                    <input type="radio" name="is_hot" checked="checked" value='1'/> 是
+                    <input type="radio" name="is_hot" value='0'/> 否
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>是否精品：</label>
+                </div>
+                <div class="field">
+                    <input type="radio" name="is_best" checked="checked" value='1'/> 是
+                    <input type="radio" name="is_best" value='0'/> 否
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>是否显示二维码：</label>
+                </div>
+                <div class="field">
+                    <input type="radio" name="is_code_show" checked="checked" value='1'/> 是
+                    <input type="radio" name="is_code_show" value='0'/> 否
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>是否生成二维码：</label>
+                </div>
+                <div class="field">
+                    <input type="radio" name="is_code" checked="checked" value='1'/> 是
+                    <input type="radio" name="is_code" value='0'/> 否
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>二维码地址：</label>
+                </div>
+                <div class="field">
+                    <input type="text" name="code_url" class="input w50"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>商品图片：</label>
+                </div>
+                <div class="field">
+                    <input type="file" name="goods_img"/>
+                </div>
+            </div>
+
+            <if condition="$iscid eq 1">
+
+
+                <div class="form-group">
+                    <div class="label">
+                        <label>商品类型：</label>
+                    </div>
+                    <div class="field">
+                        <select name="type_id" class="input w50" id="type_id">
+                            <option value="0">请选择商品类型</option>
+                            <?php foreach ($typeData as $k => $v): ?>
+                            <option value="<?php echo $v['id']?>"><?php echo $v['type_name']?></option>
+                            <?php endforeach ?>
+                        </select>
+                        <div class="tips"></div>
+                    </div>
+                </div>
+                <div class="form-group" style="display:none;" id="goodsAttrShow">
+                    <div class="label">
+                        <label>属性框：</label>
+                    </div>
+                    <div class="field" id="goodsAttr">
+                        <div class="tips"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        <label>商品分类：</label>
+                    </div>
+                    <div class="field">
+                        <select name="cat_id" class="input w50">
+                            <option value="0">请选择商品分类</option>
+                            <?php foreach ($categoryData as $k => $v): ?>
+                            <option value=" <?php echo $v['cat_id'];?>"><?php echo str_repeat('&nbsp;&nbsp;', $v['level'] * 1).$v['cat_name'];?></option>
+                            <?php endforeach ?>
+                        </select>
+                        <div class="tips"></div>
+                    </div>
+                </div>
+            </if>
+            <div class="form-group">
+                <div class="label">
+                    <label>商品描述：</label>
+                </div>
+                <div class="field">
+                    <textarea id="content" rows="10" cols="40" name="goods_descp"></textarea>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>发布时间：</label>
+                </div>
+                <div class="field">
+                    <input type="text" name="created" id="created" value="" class="laydate-icon"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 </body>
 <script type="text/javascript">
-  // 调用在线编辑器 content 上面定义的textarea的id属性
-  UE.getEditor("content",{
-    "initialFrameWidth" : 850,
-    "initialFrameHeight" : 240,
-  });
-  // 日历插件的使用
-  laydate({
-    'elem' : "#created", // 在哪一个input框使用laydate插件
-    'istime' : true, // 列出今天的时间
-    'format': 'YYYY-MM-DD hh:mm:ss', // 时间格式
-  });
+    // 调用在线编辑器 content 上面定义的textarea的id属性
+    UE.getEditor("content", {
+        "initialFrameWidth": 850,
+        "initialFrameHeight": 240,
+    });
+    // 日历插件的使用
+    laydate({
+        'elem': "#created", // 在哪一个input框使用laydate插件
+        'istime': true, // 列出今天的时间
+        'format': 'YYYY-MM-DD hh:mm:ss', // 时间格式
+    });
+
+    // 功能：点击[+] 复制当前行，并把当前行放置其下
+    function copyT(o) {
+        // o 当前点击的a连接
+        var _curLi = $(o).parent();//parent() 获得当前匹配元素集合中每个元素的父元素，使用选择器进行筛选是可选的。
+
+        // 做逻辑判断，判断点击[+] 还是[-]
+        var _newLi = '';
+        if (_curLi.find('a').html() == '[+]') {
+            _newLi = _curLi.clone(); // 复制当前行
+            _newLi.find('a').html('[-]'); // 新的行[-]
+            _curLi.after(_newLi);
+        } else {
+            _curLi.remove();
+        }
+
+    }
+
+    // 根据商品类型生成属性框
+    //当元素的值发生改变时，会发生 change 事件。
+    $("#type_id").change(function () {
+        //获取当前商品的类型id
+        var _type_id = $(this).val();
+        //发生ajax请求，获取对应 的商品类型下的属性
+        $.ajax({
+            url: 'getAttr',
+            type: 'GET',
+            data: {'type_id': _type_id},
+            dataType: 'json',
+            error: function (data) {
+                console.log(data);
+            },
+            success: function (json) {
+                var _html = "<ul>";
+                $.each(json, function (index, val) {
+                    _html += "<li>";
+                    //如果是单选属性，前面有个+
+                    if (val.attr_type == 1) {
+                        _html += "<a href='javascript:;' onclick='copyT(this)'>[+]</a>";
+                    }
+                    //2属性的名称
+                    _html += val.attr_name + ":";
+                    // 3. 属性的输入方式
+                    if (val.attr_input_type == 1) {
+                        // 列表选择, 使用逗号分隔 select
+                        var _attr_values = val.attr_values.split(',');
+                        _html += "<select name='goodsAttr[" + val.attr_id + "][]' >";
+                        // option
+                        $.each(_attr_values, function (index1, val1) {
+                            _html += "<option>" + val1 + "</option>";
+                        });
+                        _html += "<select/>";
+                    } else {
+                        // 手工
+                        _html += "<input type='text' name ='goodsAttr[" + val.attr_id + "]'/>";
+                    }
+                    _html += "</li>";
+                });
+                _html += "</ul>";
+                $("#goodsAttr").html(_html);
+                $("#goodsAttrShow").show();
+                //console.log(_html);
+            }
+        });
+    });
 </script>
 </html>
