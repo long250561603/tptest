@@ -92,14 +92,16 @@
                     <td><?php echo $v['is_hot'] == 1 ? '热销' : '非热销';?></td>
                     <td><?php echo date("Y-m-d H:i:s", $v['created']);?></td>
                     <td>
-                        <?php if( $v['goods_thumb']){
-                }else{
-                echo "暂无图片";
-                }
-                ?>
+                        <?php if( $v['goods_img']){
+                                        echo "<a href='".$rootPath.$v['goods_img']."' data-lightbox='light-test' > <img src='".$rootPath.$v['goods_img']."' width='50px;' /> </a>";
+                        }else{
+                        echo "暂无图片";
+                        }
+
+                        ?>
                     </td>
                     <td>
-                        <div class="button-group"><a class="button border-main" href="{:url('Goods/edt');}"><span
+                        <div class="button-group"><a class="button border-main" href="{:url("edt","id=$v[goods_id]")}"><span
                                 class="icon-edit"></span> 修改</a>
                             <a class="button border-red" href="javascript:void(0)"
                                onclick="return del(<?php echo $v['goods_id'];?>);">
@@ -157,8 +159,6 @@
             </tr>
             <tr>
                 <td colspan="8">
-                    <div class="pagelist"><a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-                            href="">3</a><a href="">下一页</a><a href="">尾页</a></div>
                 </td>
             </tr>
 

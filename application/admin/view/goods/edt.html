@@ -21,13 +21,15 @@
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="{:url('Goods/add')}">
+    <form method="post" class="form-x" enctype="multipart/form-data" action="">
+      <!-- 告知TP修改那条主键ID的记录 -->
+      <input type="hidden" name="goods_id" value="<?php echo $goodsInfo['goods_id'];?>">
       <div class="form-group">
         <div class="label">
           <label>商品名称：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="goods_name" data-validate="required:请输入商品名称" />
+          <input type="text" class="input w50" value="<?php echo $goodsInfo['goods_name'];?>" name="goods_name" data-validate="required:请输入商品名称" />
           <div class="tips"></div>
         </div>
       </div><div class="form-group">
@@ -35,7 +37,7 @@
           <label>商品价格：</label>
         </div>
         <div class="field">
-          <input type="text" name="goods_price" />
+          <input type="text" name="goods_price" value="<?php echo $goodsInfo['goods_price'];?>"/>
           <div class="tips"></div>
         </div>
       </div><div class="form-group">
@@ -43,7 +45,7 @@
           <label>商品库存：</label>
         </div>
         <div class="field">
-          <input type="text" name="goods_number" />
+          <input type="text" name="goods_number" value="<?php echo $goodsInfo['goods_number'];?>"/>
           <div class="tips"></div>
         </div>
       </div>
@@ -52,8 +54,8 @@
           <label>是否上架：</label>
         </div>
         <div class="field">
-          <input type="radio" name="is_sale" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_sale" value= '0' /> 否
+          <input type="radio" name="is_sale" value= '1' <?php echo $goodsInfo['is_sale'] == 1 ? 'checked="checked"' : '';?> /> 是
+          <input type="radio" name="is_sale" value= '0' <?php echo $goodsInfo['is_sale'] == 0 ? 'checked="checked"' : '';?>/> 否
           <div class="tips"></div>
         </div>
       </div>
@@ -62,8 +64,8 @@
           <label>是否新品：</label>
         </div>
         <div class="field">
-          <input type="radio" name="is_new" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_new" value= '0' /> 否
+          <input type="radio" name="is_new" value= '1'<?php echo $goodsInfo['is_new'] == 1 ? 'checked="checked"' : '';?> /> 是
+          <input type="radio" name="is_new" value= '0' <?php echo $goodsInfo['is_new'] == 0 ? 'checked="checked"' : '';?> /> 否
           <div class="tips"></div>
         </div>
       </div>
@@ -72,8 +74,8 @@
           <label>是否热销：</label>
         </div>
         <div class="field">
-          <input type="radio" name="is_hot" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_hot" value= '0' /> 否
+          <input type="radio" name="is_hot" value= '1' <?php echo $goodsInfo['is_hot'] == 1 ? 'checked="checked"' : '';?>/> 是
+          <input type="radio" name="is_hot" value= '0' <?php echo $goodsInfo['is_hot'] == 0 ? 'checked="checked"' : '';?>/> 否
           <div class="tips"></div>
         </div>
       </div>
@@ -82,8 +84,8 @@
           <label>是否精品：</label>
         </div>
         <div class="field">
-          <input type="radio" name="is_best" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_best" value= '0' /> 否
+          <input type="radio" name="is_best"  value= '1' <?php echo $goodsInfo['is_best'] == 1 ? 'checked="checked"' : '';?>/> 是
+          <input type="radio" name="is_best" value= '0' <?php echo $goodsInfo['is_best'] == 0 ? 'checked="checked"' : '';?>/> 否
           <div class="tips"></div>
         </div>
       </div>
@@ -92,8 +94,8 @@
           <label>是否显示二维码：</label>
         </div>
         <div class="field">
-          <input type="radio" name="is_code_show" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_code_show" value= '0' /> 否
+          <input type="radio" name="is_code_show"  value= '1' <?php echo $goodsInfo['is_code_show'] == 1 ? 'checked="checked"' : '';?> /> 是
+          <input type="radio" name="is_code_show" value= '0' <?php echo $goodsInfo['is_code_show'] == 0 ? 'checked="checked"' : '';?>/> 否
           <div class="tips"></div>
         </div>
       </div>
@@ -102,17 +104,8 @@
           <label>是否生成二维码：</label>
         </div>
         <div class="field">
-          <input type="radio" name="is_code" checked="checked" value= '1' /> 是
-          <input type="radio" name="is_code" value= '0' /> 否
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>二维码地址：</label>
-        </div>
-        <div class="field">
-          <input type="text" name="code_url" class="input w50"/>
+          <input type="radio" name="is_code" value= '1' <?php echo $goodsInfo['is_code'] == 1 ? 'checked="checked"' : '';?>/> 是
+          <input type="radio" name="is_code" value= '0' <?php echo $goodsInfo['is_code'] == 0 ? 'checked="checked"' : '';?>/> 否
           <div class="tips"></div>
         </div>
       </div>
@@ -121,9 +114,14 @@
           <label>商品图片：</label>
         </div>
         <div class="field">
-          <input type="text" id="url1" name="goods_img" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
-          <div class="tipss">图片尺寸：500*500</div>
+          <?php if( $goodsInfo['goods_img']){
+                            echo "<img src='".$rootPath.$goodsInfo['goods_img']."' width='200px;' />";
+          }else{
+          echo "暂无图片";
+          }
+
+          ?>
+          <input type="file" name="goods_img" value="" />
         </div>
       </div>
       
@@ -135,11 +133,24 @@
           <div class="field">
             <select name="cid" class="input w50">
               <option value="">请选择分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
+              <?php foreach ($typeData as $k => $v):
+              if($v['id'] == $goodsInfo['type_id']){
+              $selected = "selected='selected'";
+              }else{
+              $selected = "";
+              }
+              ?>
+              <option <?php echo $selected;?> value="<?php echo $v['id'];?>"><?php echo $v['type_name'];?></option>
+              <?php endforeach ?>
             </select>
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group" style="display:none;" id="goodsAttrShow">
+          <div class="label">
+            <label>属性框：</label>
+          </div>
+          <div class="field" id="goodsAttr">
             <div class="tips"></div>
           </div>
         </div>
@@ -150,23 +161,19 @@
           <div class="field">
             <select name="cid" class="input w50">
               <option value="">请选择分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
+              <?php foreach ($categoryData as $k => $v):
+              if($v['cat_id'] == $goodsInfo['cat_id']){
+              $selected = "selected='selected'";
+              }else{
+              $selected = "";
+              }
+              ?>
+              <option <?php echo $selected;?> value="<?php echo $v['cat_id'];?>">
+              <?php echo str_repeat('+', $v['level'] * 2) . $v['cat_name'];?>
+              </option>
+              <?php endforeach ?>
             </select>
             <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            <label>其他属性：</label>
-          </div>
-          <div class="field" style="padding-top:8px;"> 
-            首页 <input id="ishome"  type="checkbox" />
-            推荐 <input id="isvouch"  type="checkbox" />
-            置顶 <input id="istop"  type="checkbox" /> 
-         
           </div>
         </div>
       </if>
@@ -175,7 +182,7 @@
           <label>商品描述：</label>
         </div>
         <div class="field">
-          <textarea id="content" rows="10" cols="40" name="goods_descp"></textarea>
+          <textarea id="content" rows="10" cols="40" name="goods_descp"><?php echo $goodsInfo['goods_descp'];?></textarea>
           <div class="tips"></div>
         </div>
       </div>
@@ -184,7 +191,7 @@
           <label>发布时间：</label>
         </div>
         <div class="field">
-          <input type="text" name="created" id="created" value="" class="laydate-icon" />
+          <input type="text" name="created" id="created" value="<?php echo date("Y-m-d H:i:s", $goodsInfo['created']);?>" class="laydate-icon" />
           <div class="tips"></div>
         </div>
       </div>

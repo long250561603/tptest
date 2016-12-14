@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
+<!doctype html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +21,7 @@
 <div class="panel admin-panel">
     <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="">
+        <FORM method="post" enctype="multipart/form-data" class="form-x" action="{:url('add')}">
             <div class="form-group">
                 <div class="label">
                     <label>商品名称：</label>
@@ -123,7 +123,7 @@
                     <label>商品图片：</label>
                 </div>
                 <div class="field">
-                    <input type="file" name="goods_img"/>
+                    <INPUT type="file" class="file" name="goods_img" id="goods_img"><br/>
                 </div>
             </div>
 
@@ -136,7 +136,7 @@
                     </div>
                     <div class="field">
                         <select name="type_id" class="input w50" id="type_id">
-                            <option value="0">请选择商品类型</option>
+                            <option >请选择...</option>
                             <?php foreach ($typeData as $k => $v): ?>
                             <option value="<?php echo $v['id']?>"><?php echo $v['type_name']?></option>
                             <?php endforeach ?>
@@ -158,7 +158,7 @@
                     </div>
                     <div class="field">
                         <select name="cat_id" class="input w50">
-                            <option value="0">请选择商品分类</option>
+                            <option>请选择....</option>
                             <?php foreach ($categoryData as $k => $v): ?>
                             <option value=" <?php echo $v['cat_id'];?>"><?php echo str_repeat('&nbsp;&nbsp;', $v['level'] * 1).$v['cat_name'];?></option>
                             <?php endforeach ?>
@@ -194,11 +194,9 @@
                     <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
                 </div>
             </div>
-        </form>
+        </FORM>
     </div>
 </div>
-
-</body>
 <script type="text/javascript">
     // 调用在线编辑器 content 上面定义的textarea的id属性
     UE.getEditor("content", {
@@ -277,4 +275,5 @@
         });
     });
 </script>
+</body>
 </html>

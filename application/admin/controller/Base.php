@@ -15,6 +15,7 @@ use think\Loader;
 use think\Cache;
 use think\Db;
 use think\Session;
+use think\Request;
 /***
  * Class Base
  * @package app\index\controller
