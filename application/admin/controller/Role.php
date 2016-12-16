@@ -24,9 +24,6 @@ class Role extends Base
      */
     public function lst(){
 
-        /*$roleLst = Db::table('it_role')->field('a.*, group_concat(b.tetle) tetle')->alias('a')->join('left join it_auth b on find_in_set(b.id,a.rules)')->group('a.id')->select();
-        echo "<pre>";
-        print_r($roleLst);die;*/
         $roleLst=db('role')->select();
         $this->assign('roleLst',$roleLst);
         return $this->fetch();
@@ -95,7 +92,6 @@ class Role extends Base
         $this->assign('id',$id);
         $rules= Loader::model("role")->where('id',$id)->value('rules');;
         $this->assign('rules',$rules);
-
         $authModel =Loader::model("auth");
         $authData = $authModel->getTree();
         $this->assign('authData', $authData);

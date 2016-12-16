@@ -1,0 +1,20 @@
+<h3><span>商品分类</span></h3> 
+                <!-- 商品分类 -->
+                <div id="category_tree" class="box_1">
+                    <!-- 循环 -->
+                    <?php foreach ($cateData as $k => $v): ?>
+                        <?php if( $v['pid'] == 0):?>
+                        <dl>
+                            <dt><a href="<?php echo U('Goods/category', array('cate_id'=>$v['cat_id']));?>"><?php echo $v['cat_name'];?></a></dt>
+                            <dd>    
+                             <!--  获取当前分类的子分类-->
+                             <?php foreach ($cateData as $k1 => $v1): ?>
+                                <?php if($v1['pid'] == $v['cat_id']):?>
+                                    <a href="<?php echo U('Goods/category', array('cate_id'=>$v1['cat_id']));?>"><?php echo $v1['cat_name'];?></a>
+                                <?php endif;?>
+                             <?php endforeach ?>
+                            </dd>
+                        </dl>
+                        <?php endif;?>
+                    <?php endforeach ?>
+</div>

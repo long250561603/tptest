@@ -23,12 +23,18 @@
                 <label>选择权限：</label>
             </div>
             <div class="field">
-                <?php foreach($authData as $k=>$v): ?>
+                <?php foreach($authData as $k=>$v):
+                if(strpos(','.$rules.',',  ','.$v['id'].',')  !== false || $rules == '*'){
+                $checked = "checked='checked'";
+                }else{
+                $checked = "";
+                }
+                ?>
                 <li>
                     <?php echo str_repeat('&nbsp;',$v['level']*2);?>
 
 
-                    <input type="checkbox" name="rules[]" value="<?php echo $v['id']; ?>">
+                    <input type="checkbox" name="rules[]" value="<?php echo $v['id']; ?>" <?php echo $checked?>>
 
                     <?php echo $v['title']; ?>
                 </li>
