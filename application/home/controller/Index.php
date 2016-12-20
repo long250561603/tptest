@@ -11,7 +11,7 @@ class Index extends Base
         $viewPath = "/public";
         $this->assign('viewPath', $viewPath);
         //获取新品
-        $newData  =Db::name('goods')->where('is_new',1)->where('is_delete',0)->where('is_sale',1)->select();
+        $newData  =Db::name('goods')->where('is_new',1)->where('is_delete',0)->where('is_sale',1)->limit('3')->select();
         $this->assign('newData',$newData);
         //获取热销
         $hotData  =Db::name('goods')->where('is_hot',1)->where('is_delete',0)->where('is_sale',1)->select();
