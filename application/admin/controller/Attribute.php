@@ -54,4 +54,5 @@ class Attribute extends Base
     public function del(){
         return $this->fetch();
     }
+
 }

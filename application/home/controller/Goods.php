@@ -19,12 +19,13 @@ class Goods extends Base
         $this->assign('goodsInfo', $goodsInfo);
 
         // 1. 先获取商品属性，由于只需要获取单选属性，所以需要联表操属性表，获取属性类型
-        $attrData=Db::name('goods_attribute')
+        $attrData = Db::name('goods_attribute')
             ->alias('a')
             ->join('it_attribute b','a.goods_attr_id = b.attr_id')
             ->where('a.goods_id',$goods_id)
             ->select();
         // 2. 处理商品属性，取出单选属性
+        //dump($attrData);die;
         $radioData = array();
         foreach ($attrData as $k => $v) {
             if($v['attr_type'] == 1){

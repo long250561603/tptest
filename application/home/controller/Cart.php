@@ -7,7 +7,7 @@
  */
 
 namespace app\home\controller;
-
+use think\Loader;
 
 class Cart extends Base
 {
@@ -18,7 +18,12 @@ class Cart extends Base
         $data = input();
         unset($data['goods_id']);
         unset($data['goods_number']);
-        $goodsAttrId = implode(',', $data); // 18,22;k
+
+        $goodsAttrId = implode(',', $data); // 18,22;
+
+        // 加入到购物车存储
+        Loader::model('cart')->addToCart($goodsId, $goodsNumber, $goodsAttrId);
+        $this->success('加入购物车成功',url("Cart/cartList"));
     }
     //购物车列表
     public function cartList(){
